@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const userSchema=mongoose.Schema({
-    username: {
+    name: {
         type: String,
-        required: [true, 'Username is required'],
-        unique: [true, 'This Username is already taken']
+        required: [true, 'Name is required'],
+        minLength: [4, 'Name should have atleast 4 character']
     },
     email: {
         type: String,
@@ -15,8 +15,12 @@ const userSchema=mongoose.Schema({
         type: String,
         required: [true, 'Password is required'],
         minLength: [5, 'Atleast 5 letters should be there in password']
+    },
+    resetPasswordLink: {
+        type: String,
+        default: ''
     }
-})
+}, {timestamps: true})
 
 const User=mongoose.model('User', userSchema);
 
